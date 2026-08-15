@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block page_title %}Vehicles - Vehicle Rental System{% endblock %}
+
+{% block header %}
+    <header class="mb-6 flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800">Vehicles</h1>
+            <p class="text-gray-500 text-sm mt-1">Manage all vehicles in the fleet</p>
+        </div>
+        <a href="{{ url_for('vehicle_new') }}"
+           class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow">
+            + Add Vehicle
+        </a>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="bg-white rounded-xl shadow overflow-hidden">
+        <table class="w-full text-sm text-left">
+            <thead class="bg-slate-50 text-slate-500 uppercase text-xs tracking-wide">
+                <tr>
+                    <th class="px-4 py-3">Vehicle ID</th>
+                    <th class="px-4 py-3">Vehicle Name</th>
+                    <th class="px-4 py-3">Type</th>
+                    <th class="px-4 py-3">Price</th>
+                    <th class="px-4 py-3">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {% for v in vehicles %}
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3">{{ v["id"] }}</td>
+                    <td class="px-4 py-3 font-medium">{{ v["name"] }}</td>
+                    <td class="px-4 py-3">{{ v["type"] }}</td>
+                    <td class="px-4 py-3">${{ v["price"] }}/day</td>
+                    <td class="px-4 py-3 flex space-x-2">
+                        <a href="{{ url_for('vehicle_edit', id=v['id']) }}"
+                           class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-3 py-1.5 rounded font-medium">Edit</a>
+                        <form method="post" action="{{ url_for('vehicle_delete', id=v['id']) }}"
+                              onsubmit="return confirm('Delete this vehicle?');">
+                            <button type="submit"
+                                    class="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1.5 rounded font-medium">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="px-4 py-6 text-center text-gray-500">No vehicles found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

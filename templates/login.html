@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Vehicle Rental System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-slate-900">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 w-96">
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-center text-slate-800">Vehicle Rental System</h1>
+            <p class="text-center text-gray-500 mt-2 text-sm">Please log in to continue</p>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for m in messages %}
+                    <div class="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-2 rounded-lg mb-4 text-sm">{{ m }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="post" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" name="username" required autofocus
+                       class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" name="password" required
+                       class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex items-center">
+                <input type="checkbox" name="remember" id="remember" class="mr-2">
+                <label for="remember" class="text-sm text-gray-600">Remember me</label>
+            </div>
+            <button type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg shadow">
+                Login
+            </button>
+        </form>
+        <p class="text-center text-xs text-gray-400 mt-4">Default login: admin / admin</p>
+    </div>
+</body>
+</html>
