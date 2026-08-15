@@ -3,8 +3,11 @@ import time
 from datetime import datetime
 from functools import wraps
 import httpx
+from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 from supabase import create_client
+
+load_dotenv()
 
 # Supabase connection (set these as environment variables to override)
 SUPABASE_URL = os.environ.get(
